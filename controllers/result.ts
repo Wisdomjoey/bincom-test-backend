@@ -46,7 +46,7 @@ export const fetchTotalPUResults = async (req: Request, res: Response) => {
 			...parties.map(val => db.announced_pu_results.aggregate({ where: { party_abbreviation: val.partyname }, _sum: { party_score: true } }))
 		])
 
-		return res.status(200).json({ success: true, message: 'Successfully fetched records', data: [...parties.map((val, ind) => ({ party: val.partyname, result: results[ind]._sum ?? 0 }))] })
+		return res.status(200).json({ success: true, message: 'Successfully fetched records', data: [...parties.map((val, ind) => ({ party: val.partyname, result: results[ind]._sum.party_score ?? 0 }))] })
 	} catch (error) {
 		return res.status(500).json({
 			success: false,

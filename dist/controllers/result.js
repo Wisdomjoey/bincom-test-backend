@@ -106,7 +106,7 @@ export var fetchTotalPUResults = function (req, res) { return __awaiter(void 0, 
                 return [4 /*yield*/, db.$transaction(__spreadArray([], parties.map(function (val) { return db.announced_pu_results.aggregate({ where: { party_abbreviation: val.partyname }, _sum: { party_score: true } }); }), true))];
             case 2:
                 results_1 = _a.sent();
-                return [2 /*return*/, res.status(200).json({ success: true, message: 'Successfully fetched records', data: __spreadArray([], parties.map(function (val, ind) { var _a; return ({ party: val.partyname, result: (_a = results_1[ind]._sum) !== null && _a !== void 0 ? _a : 0 }); }), true) })];
+                return [2 /*return*/, res.status(200).json({ success: true, message: 'Successfully fetched records', data: __spreadArray([], parties.map(function (val, ind) { var _a; return ({ party: val.partyname, result: (_a = results_1[ind]._sum.party_score) !== null && _a !== void 0 ? _a : 0 }); }), true) })];
             case 3:
                 error_3 = _a.sent();
                 return [2 /*return*/, res.status(500).json({
