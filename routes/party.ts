@@ -1,5 +1,5 @@
 import express from "express";
-import { fetchParties } from "../controllers/party";
+import { fetchParties } from "../controllers/party.js";
 
 const partyRouter = express.Router();
 
