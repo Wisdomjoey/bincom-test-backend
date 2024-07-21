@@ -1,0 +1,108 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model agentname {
+  name_id   Int    @unique @db.Int
+  firstname String @db.VarChar(255)
+  lastname  String @db.VarChar(255)
+  email     String @db.VarChar(255)
+  phone     String @db.VarChar(255)
+
+  polling_unit_uniqueid Int          @db.Int
+  polling_unit          polling_unit @relation(fields: [polling_unit_uniqueid], references: [uniqueid])
+}
+
+model announced_lga_results {
+  result_id          Int      @unique @db.Int
+  lga_id             Int      @db.Int
+  party_score        Int      @db.Int
+  party_abbreviation String   @db.VarChar(255)
+  entered_by_user    String?  @db.VarChar(255)
+  user_ip_address    String?  @db.VarChar(255)
+  date_entered       DateTime @db.DateTime()
+}
+
+model announced_pu_results {
+  result_id             Int      @unique @db.Int
+  polling_unit_uniqueid Int      @db.Int
+  party_score           Int      @db.Int
+  party_abbreviation    String   @db.VarChar(255)
+  entered_by_user       String?  @db.VarChar(255)
+  user_ip_address       String?  @db.VarChar(255)
+  date_entered          DateTime @db.DateTime()
+}
+
+model lga {
+  uniqueid        Int      @unique @db.Int
+  lga_id          Int      @unique @db.Int
+  lga_name        String   @db.VarChar(255)
+  lga_description String?  @db.VarChar(255)
+  entered_by_user String?  @db.VarChar(255)
+  date_entered    DateTime @db.DateTime()
+  user_ip_address String?  @db.VarChar(255)
+
+  state_id Int    @db.Int
+  state    states @relation(fields: [state_id], references: [state_id])
+
+  wards ward[]
+}
+
+model party {
+  id        Int    @unique @db.Int
+  partyid   String @unique @db.VarChar(255)
+  partyname String @unique @db.VarChar(255)
+}
+
+model polling_unit {
+  uniqueid                 Int      @unique @db.Int
+  polling_unit_id          Int      @unique @db.Int
+  uniquewardid             Int      @unique @db.Int
+  lga_id                   Int      @unique @db.Int
+  lat                      Float    @db.Double
+  long                     Float    @db.Double
+  polling_unit_number      String   @unique @db.VarChar(255)
+  polling_unit_name        String   @db.VarChar(255)
+  polling_unit_description String?  @db.VarChar(255)
+  entered_by_user          String?  @db.VarChar(255)
+  user_ip_address          String?  @db.VarChar(255)
+  date_entered             DateTime @db.DateTime()
+
+  ward_id Int  @db.Int
+  ward    ward @relation(fields: [ward_id], references: [ward_id])
+
+  agents agentname[]
+}
+
+model states {
+  state_id   Int    @unique @db.Int
+  state_name String @db.VarChar(255)
+
+  lgas lga[]
+}
+
+model ward {
+  uniqueid         Int      @unique @db.Int
+  ward_id          Int      @unique @db.Int
+  ward_name        String   @db.VarChar(255)
+  ward_description String?  @db.VarChar(255)
+  entered_by_user  String?  @db.VarChar(255)
+  user_ip_address  String?  @db.VarChar(255)
+  date_entered     DateTime @db.DateTime()
+
+  lga_id Int @db.Int
+  lga    lga @relation(fields: [lga_id], references: [lga_id])
+
+  polling_units polling_unit[]
+}
