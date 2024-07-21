@@ -1,5 +1,5 @@
 import express from "express";
-import { fetchPollingUnits } from "../controllers/polling_unit";
+import { fetchPollingUnits } from "../controllers/polling_unit.js";
 
 const pollingUnitRouter = express.Router();
 

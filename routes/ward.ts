@@ -1,5 +1,5 @@
 import express from "express";
-import { fetchWards } from "../controllers/ward";
+import { fetchWards } from "../controllers/ward.js";
 
 const wardRouter = express.Router();
 

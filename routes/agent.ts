@@ -1,5 +1,5 @@
 import express from "express";
-import { fetchAgents } from "../controllers/agent";
+import { fetchAgents } from "../controllers/agent.js";
 
 const agentRouter = express.Router();
 

@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { db } from "../config/db_config";
+import { db } from "../config/db_config.js";
 
 export const fetchWards = async (req: Request, res: Response) => {
 	try {
