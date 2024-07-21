@@ -9,6 +9,9 @@
 		"esModuleInterop": true,
 		"resolveJsonModule": true,
 		"moduleResolution": "bundler",
+		"declaration": true,
+		"emitDeclarationOnly": true,
+		"allowImportingTsExtensions": true,
 		"rootDir": "./",
 		"outDir": "dist"
 	},
