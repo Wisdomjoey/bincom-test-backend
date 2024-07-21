@@ -9,8 +9,7 @@
 		"esModuleInterop": true,
 		"resolveJsonModule": true,
 		"moduleResolution": "nodenext",
-		"rootDir": "./",
-		"outDir": "dist"
+		"rootDir": "./"
 	},
 	"include": ["**/*.ts"]
 }
