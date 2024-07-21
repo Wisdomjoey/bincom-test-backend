@@ -41,11 +41,11 @@ export const fetchPUResults = async (req: Request, res: Response) => {
 
 export const fetchTotalPUResults = async (req: Request, res: Response) => {
 	try {
+		console.log('first')
 		const response = await fetch('/api/parties')
-console.log('first')
+		console.log('second')
 		if (!response.ok) return res.status(500).json({ success: false, message: 'Something went wrong' })
 
-			console.log('second')
 		const data = (await response.json()) as APIResponse
 		const parties = data.data as party[]
 		const results = await db.$transaction([
