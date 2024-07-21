@@ -18,3 +18,21 @@ export const fetchWards = async (req: Request, res: Response) => {
 		});
 	}
 };
+
+export const fetchTotalWards = async (req: Request, res: Response) => {
+	try {
+		const count = await db.ward.count();
+
+		return res.status(200).json({
+			success: true,
+			message: "Successfully fetched records",
+			data: count,
+		});
+	} catch (error) {
+		return res.status(500).json({
+			success: false,
+			message: "Server Error. An error occured while fetching records",
+			error,
+		});
+	}
+};

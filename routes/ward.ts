@@ -1,8 +1,9 @@
 import express from "express";
-import { fetchWards } from "../controllers/ward.js";
+import { fetchTotalWards, fetchWards } from "../controllers/ward.js";
 
 const wardRouter = express.Router();
 
 wardRouter.get("/wards", fetchWards);
+wardRouter.get("/total-wards", fetchTotalWards);
 
 export default wardRouter;

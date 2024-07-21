@@ -60,3 +60,54 @@ export var fetchPollingUnits = function (req, res) { return __awaiter(void 0, vo
         }
     });
 }); };
+export var fetchTotalPollingUnits = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var count, error_2;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                return [4 /*yield*/, db.polling_unit.count()];
+            case 1:
+                count = _a.sent();
+                return [2 /*return*/, res.status(200).json({
+                        success: true,
+                        message: "Successfully fetched records",
+                        data: count,
+                    })];
+            case 2:
+                error_2 = _a.sent();
+                return [2 /*return*/, res.status(500).json({
+                        success: false,
+                        message: "Server Error. An error occured while fetching records",
+                        error: error_2,
+                    })];
+            case 3: return [2 /*return*/];
+        }
+    });
+}); };
+export var fetchLGAPollingUnits = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var lga_id, pollingUnits, error_3;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                lga_id = req.body.lga_id;
+                return [4 /*yield*/, db.polling_unit.findMany({ where: { lga_id: lga_id } })];
+            case 1:
+                pollingUnits = _a.sent();
+                return [2 /*return*/, res.status(200).json({
+                        success: true,
+                        message: "Successfully fetched records",
+                        data: pollingUnits,
+                    })];
+            case 2:
+                error_3 = _a.sent();
+                return [2 /*return*/, res.status(500).json({
+                        success: false,
+                        message: "Server Error. An error occured while fetching records",
+                        error: error_3,
+                    })];
+            case 3: return [2 /*return*/];
+        }
+    });
+}); };

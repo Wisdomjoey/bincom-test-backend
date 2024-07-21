@@ -34,6 +34,15 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
+};
 import { db } from "../config/db_config.js";
 export var fetchLGAResults = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var results, error_1;
@@ -82,6 +91,36 @@ export var fetchPUResults = function (req, res) { return __awaiter(void 0, void 
                         error: error_2,
                     })];
             case 3: return [2 /*return*/];
+        }
+    });
+}); };
+export var fetchTotalPUResults = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var response, data, parties, results_1, error_3;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 4, , 5]);
+                return [4 /*yield*/, fetch('/api/parties')];
+            case 1:
+                response = _a.sent();
+                if (!response.ok)
+                    return [2 /*return*/, res.status(500).json({ success: false, message: 'Something went wrong' })];
+                return [4 /*yield*/, response.json()];
+            case 2:
+                data = (_a.sent());
+                parties = data.data;
+                return [4 /*yield*/, db.$transaction(__spreadArray([], parties.map(function (val) { return db.announced_pu_results.aggregate({ where: { party_abbreviation: val.partyname }, _sum: { party_score: true } }); }), true))];
+            case 3:
+                results_1 = _a.sent();
+                return [2 /*return*/, res.status(200).json({ success: true, message: 'Successfully fetched records', data: __spreadArray([], parties.map(function (val, ind) { var _a; return ({ party: val.partyname, result: (_a = results_1[ind]._sum) !== null && _a !== void 0 ? _a : 0 }); }), true) })];
+            case 4:
+                error_3 = _a.sent();
+                return [2 /*return*/, res.status(500).json({
+                        success: false,
+                        message: "Server Error. An error occured while fetching records",
+                        error: error_3,
+                    })];
+            case 5: return [2 /*return*/];
         }
     });
 }); };

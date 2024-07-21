@@ -60,3 +60,28 @@ export var fetchLGAs = function (req, res) { return __awaiter(void 0, void 0, vo
         }
     });
 }); };
+export var fetchTotalLGAs = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var lgas, error_2;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                return [4 /*yield*/, db.lga.count()];
+            case 1:
+                lgas = _a.sent();
+                return [2 /*return*/, res.status(200).json({
+                        success: true,
+                        message: "Successfully fetched records",
+                        data: lgas,
+                    })];
+            case 2:
+                error_2 = _a.sent();
+                return [2 /*return*/, res.status(500).json({
+                        success: false,
+                        message: "Server Error. An error occured while fetching records",
+                        error: error_2,
+                    })];
+            case 3: return [2 /*return*/];
+        }
+    });
+}); };
