@@ -41,13 +41,7 @@ export const fetchPUResults = async (req: Request, res: Response) => {
 
 export const fetchTotalPUResults = async (req: Request, res: Response) => {
 	try {
-		console.log('first')
-		const response = await fetch('/parties')
-		console.log('second')
-		if (!response.ok) return res.status(500).json({ success: false, message: 'Something went wrong' })
-
-		const data = (await response.json()) as APIResponse
-		const parties = data.data as party[]
+		const parties = await db.party.findMany()
 		const results = await db.$transaction([
 			...parties.map(val => db.announced_pu_results.aggregate({ where: { party_abbreviation: val.partyname }, _sum: { party_score: true } }))
 		])
