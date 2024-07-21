@@ -101,7 +101,7 @@ export var fetchTotalPUResults = function (req, res) { return __awaiter(void 0, 
             case 0:
                 _a.trys.push([0, 4, , 5]);
                 console.log('first');
-                return [4 /*yield*/, fetch('/api/parties')];
+                return [4 /*yield*/, fetch('/parties')];
             case 1:
                 response = _a.sent();
                 console.log('second');

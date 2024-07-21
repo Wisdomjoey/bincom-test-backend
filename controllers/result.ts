@@ -42,7 +42,7 @@ export const fetchPUResults = async (req: Request, res: Response) => {
 export const fetchTotalPUResults = async (req: Request, res: Response) => {
 	try {
 		console.log('first')
-		const response = await fetch('/api/parties')
+		const response = await fetch('/parties')
 		console.log('second')
 		if (!response.ok) return res.status(500).json({ success: false, message: 'Something went wrong' })
 
