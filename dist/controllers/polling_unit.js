@@ -111,3 +111,29 @@ export var fetchLGAPollingUnits = function (req, res) { return __awaiter(void 0,
         }
     });
 }); };
+export var fetchWardPollingUnits = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var ward_id, pollingUnits, error_4;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                ward_id = req.body.ward_id;
+                return [4 /*yield*/, db.polling_unit.findMany({ where: { ward_id: ward_id } })];
+            case 1:
+                pollingUnits = _a.sent();
+                return [2 /*return*/, res.status(200).json({
+                        success: true,
+                        message: "Successfully fetched records",
+                        data: pollingUnits,
+                    })];
+            case 2:
+                error_4 = _a.sent();
+                return [2 /*return*/, res.status(500).json({
+                        success: false,
+                        message: "Server Error. An error occured while fetching records",
+                        error: error_4,
+                    })];
+            case 3: return [2 /*return*/];
+        }
+    });
+}); };

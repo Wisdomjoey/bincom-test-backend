@@ -60,8 +60,34 @@ export var fetchWards = function (req, res) { return __awaiter(void 0, void 0, v
         }
     });
 }); };
+export var fetchLGAWards = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var lga_id, wards, error_2;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                lga_id = req.body.lga_id;
+                return [4 /*yield*/, db.ward.findMany({ where: { lga_id: lga_id } })];
+            case 1:
+                wards = _a.sent();
+                return [2 /*return*/, res.status(200).json({
+                        success: true,
+                        message: "Successfully fetched records",
+                        data: wards,
+                    })];
+            case 2:
+                error_2 = _a.sent();
+                return [2 /*return*/, res.status(500).json({
+                        success: false,
+                        message: "Server Error. An error occured while fetching records",
+                        error: error_2,
+                    })];
+            case 3: return [2 /*return*/];
+        }
+    });
+}); };
 export var fetchTotalWards = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var count, error_2;
+    var count, error_3;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -75,11 +101,11 @@ export var fetchTotalWards = function (req, res) { return __awaiter(void 0, void
                         data: count,
                     })];
             case 2:
-                error_2 = _a.sent();
+                error_3 = _a.sent();
                 return [2 /*return*/, res.status(500).json({
                         success: false,
                         message: "Server Error. An error occured while fetching records",
-                        error: error_2,
+                        error: error_3,
                     })];
             case 3: return [2 /*return*/];
         }
