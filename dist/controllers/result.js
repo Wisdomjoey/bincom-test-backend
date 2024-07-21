@@ -103,8 +103,10 @@ export var fetchTotalPUResults = function (req, res) { return __awaiter(void 0, 
                 return [4 /*yield*/, fetch('/api/parties')];
             case 1:
                 response = _a.sent();
+                console.log('first');
                 if (!response.ok)
                     return [2 /*return*/, res.status(500).json({ success: false, message: 'Something went wrong' })];
+                console.log('second');
                 return [4 /*yield*/, response.json()];
             case 2:
                 data = (_a.sent());
