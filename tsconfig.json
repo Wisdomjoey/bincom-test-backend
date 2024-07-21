@@ -4,11 +4,11 @@
 		"lib": ["es6"],
 		"allowJs": true,
 		"strict": true,
-		"module": "nodenext",
+		"module": "preserve",
 		"noImplicitAny": true,
 		"esModuleInterop": true,
 		"resolveJsonModule": true,
-		"moduleResolution": "nodenext",
+		"moduleResolution": "bundler",
 		"rootDir": "./"
 	},
 	"include": ["**/*.ts"]
