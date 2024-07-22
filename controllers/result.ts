@@ -72,8 +72,6 @@ export const fetchLGAPUResults = async (req: Request, res: Response) => {
       where: { lga_id },
       select: { uniqueid: true },
     });
-    console.log(lga_id)
-    console.log(units)
     const results = await db.$transaction([
       ...units.map((val) =>
         db.announced_pu_results.findMany({
@@ -81,7 +79,6 @@ export const fetchLGAPUResults = async (req: Request, res: Response) => {
         })
       ),
     ]);
-    console.log(results)
 
     return res.status(200).json({
       success: true,
