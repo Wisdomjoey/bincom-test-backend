@@ -20,8 +20,8 @@ model agentname {
   email     String @db.VarChar(255)
   phone     String @db.VarChar(255)
 
-  polling_unit_uniqueid Int          @db.Int
-  polling_unit          polling_unit @relation(fields: [polling_unit_uniqueid], references: [uniqueid])
+  pollingunit_uniqueid Int          @db.Int
+  polling_unit          polling_unit @relation(fields: [pollingunit_uniqueid], references: [uniqueid])
 }
 
 model announced_lga_results {

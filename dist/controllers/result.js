@@ -44,6 +44,7 @@ var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
     return to.concat(ar || Array.prototype.slice.call(from));
 };
 import { db } from "../config/db_config.js";
+import { generateId } from "../helpers.js";
 export var fetchLGAResults = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var results, error_1;
     return __generator(this, function (_a) {
@@ -101,7 +102,9 @@ export var fetchPUResult = function (req, res) { return __awaiter(void 0, void 0
             case 0:
                 _a.trys.push([0, 2, , 3]);
                 uniqueid = req.body.uniqueid;
-                return [4 /*yield*/, db.announced_pu_results.findMany({ where: { polling_unit_uniqueid: uniqueid } })];
+                return [4 /*yield*/, db.announced_pu_results.findMany({
+                        where: { polling_unit_uniqueid: uniqueid },
+                    })];
             case 1:
                 results = _a.sent();
                 return [2 /*return*/, res.status(200).json({
@@ -120,8 +123,62 @@ export var fetchPUResult = function (req, res) { return __awaiter(void 0, void 0
         }
     });
 }); };
+export var uploadPUResult = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var _a, uniqueid_1, results, entered_by_1, result_id_1, existingResult, error_4;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _b.trys.push([0, 6, , 7]);
+                _a = req.body, uniqueid_1 = _a.uniqueid, results = _a.results, entered_by_1 = _a.entered_by;
+                result_id_1 = parseInt(generateId(6));
+                return [4 /*yield*/, db.announced_pu_results.findUnique({
+                        where: { result_id: result_id_1 },
+                    })];
+            case 1:
+                existingResult = _b.sent();
+                _b.label = 2;
+            case 2:
+                if (!existingResult) return [3 /*break*/, 4];
+                result_id_1 = parseInt(generateId(6));
+                return [4 /*yield*/, db.announced_pu_results.findUnique({
+                        where: { result_id: result_id_1 },
+                    })];
+            case 3:
+                existingResult = _b.sent();
+                return [3 /*break*/, 2];
+            case 4: return [4 /*yield*/, db.$transaction(__spreadArray([], results.map(function (result) {
+                    return db.announced_pu_results.create({
+                        data: {
+                            date_entered: new Date(),
+                            party_abbreviation: result.party,
+                            party_score: result.score,
+                            polling_unit_uniqueid: uniqueid_1,
+                            result_id: result_id_1,
+                            entered_by_user: entered_by_1,
+                            user_ip_address: req.ip,
+                        },
+                    });
+                }), true))];
+            case 5:
+                _b.sent();
+                return [2 /*return*/, res.status(201).json({
+                        success: true,
+                        message: "Successfully created records",
+                        data: results,
+                    })];
+            case 6:
+                error_4 = _b.sent();
+                return [2 /*return*/, res.status(500).json({
+                        success: false,
+                        message: "Server Error. An error occured while fetching records",
+                        error: error_4,
+                    })];
+            case 7: return [2 /*return*/];
+        }
+    });
+}); };
 export var fetchTotalPUResults = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var parties, results_1, error_4;
+    var parties, results_1, error_5;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -129,16 +186,31 @@ export var fetchTotalPUResults = function (req, res) { return __awaiter(void 0, 
                 return [4 /*yield*/, db.party.findMany()];
             case 1:
                 parties = _a.sent();
-                return [4 /*yield*/, db.$transaction(__spreadArray([], parties.map(function (val) { return db.announced_pu_results.aggregate({ where: { party_abbreviation: val.partyname }, _sum: { party_score: true } }); }), true))];
+                return [4 /*yield*/, db.$transaction(__spreadArray([], parties.map(function (val) {
+                        return db.announced_pu_results.aggregate({
+                            where: { party_abbreviation: val.partyname },
+                            _sum: { party_score: true },
+                        });
+                    }), true))];
             case 2:
                 results_1 = _a.sent();
-                return [2 /*return*/, res.status(200).json({ success: true, message: 'Successfully fetched records', data: __spreadArray([], parties.map(function (val, ind) { var _a; return ({ party: val.partyname, result: (_a = results_1[ind]._sum.party_score) !== null && _a !== void 0 ? _a : 0 }); }), true) })];
+                return [2 /*return*/, res.status(200).json({
+                        success: true,
+                        message: "Successfully fetched records",
+                        data: __spreadArray([], parties.map(function (val, ind) {
+                            var _a;
+                            return ({
+                                party: val.partyname,
+                                result: (_a = results_1[ind]._sum.party_score) !== null && _a !== void 0 ? _a : 0,
+                            });
+                        }), true),
+                    })];
             case 3:
-                error_4 = _a.sent();
+                error_5 = _a.sent();
                 return [2 /*return*/, res.status(500).json({
                         success: false,
                         message: "Server Error. An error occured while fetching records",
-                        error: error_4,
+                        error: error_5,
                     })];
             case 4: return [2 /*return*/];
         }
