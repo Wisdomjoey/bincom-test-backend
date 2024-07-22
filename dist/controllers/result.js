@@ -139,6 +139,8 @@ export var fetchLGAPUResults = function (req, res) { return __awaiter(void 0, vo
                     })];
             case 1:
                 units = _a.sent();
+                console.log(lga_id);
+                console.log(units);
                 return [4 /*yield*/, db.$transaction(__spreadArray([], units.map(function (val) {
                         return db.announced_pu_results.findMany({
                             where: { polling_unit_uniqueid: val.uniqueid },
@@ -146,6 +148,7 @@ export var fetchLGAPUResults = function (req, res) { return __awaiter(void 0, vo
                     }), true))];
             case 2:
                 results = _a.sent();
+                console.log(results);
                 return [2 /*return*/, res.status(200).json({
                         success: true,
                         message: "Successfully fetched records",
