@@ -22,7 +22,6 @@ export const fetchWards = async (req: Request, res: Response) => {
 export const fetchLGAWards = async (req: Request, res: Response) => {
 	try {
 		const { lga_id } = req.body
-		console.log(lga_id, typeof lga_id)
 		const wards = await db.ward.findMany({ where: { lga_id } });
 
 		return res.status(200).json({

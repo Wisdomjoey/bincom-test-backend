@@ -94,8 +94,34 @@ export var fetchPUResults = function (req, res) { return __awaiter(void 0, void 
         }
     });
 }); };
+export var fetchPUResult = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var uniqueid, results, error_3;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                uniqueid = req.body.uniqueid;
+                return [4 /*yield*/, db.announced_pu_results.findMany({ where: { polling_unit_uniqueid: uniqueid } })];
+            case 1:
+                results = _a.sent();
+                return [2 /*return*/, res.status(200).json({
+                        success: true,
+                        message: "Successfully fetched records",
+                        data: results,
+                    })];
+            case 2:
+                error_3 = _a.sent();
+                return [2 /*return*/, res.status(500).json({
+                        success: false,
+                        message: "Server Error. An error occured while fetching records",
+                        error: error_3,
+                    })];
+            case 3: return [2 /*return*/];
+        }
+    });
+}); };
 export var fetchTotalPUResults = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var parties, results_1, error_3;
+    var parties, results_1, error_4;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -108,11 +134,11 @@ export var fetchTotalPUResults = function (req, res) { return __awaiter(void 0, 
                 results_1 = _a.sent();
                 return [2 /*return*/, res.status(200).json({ success: true, message: 'Successfully fetched records', data: __spreadArray([], parties.map(function (val, ind) { var _a; return ({ party: val.partyname, result: (_a = results_1[ind]._sum.party_score) !== null && _a !== void 0 ? _a : 0 }); }), true) })];
             case 3:
-                error_3 = _a.sent();
+                error_4 = _a.sent();
                 return [2 /*return*/, res.status(500).json({
                         success: false,
                         message: "Server Error. An error occured while fetching records",
-                        error: error_3,
+                        error: error_4,
                     })];
             case 4: return [2 /*return*/];
         }

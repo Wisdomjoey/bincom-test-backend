@@ -39,6 +39,25 @@ export const fetchPUResults = async (req: Request, res: Response) => {
 	}
 };
 
+export const fetchPUResult = async (req: Request, res: Response) => {
+	try {
+		const { uniqueid } = req.body
+		const results = await db.announced_pu_results.findMany({ where: { polling_unit_uniqueid: uniqueid } });
+
+		return res.status(200).json({
+			success: true,
+			message: "Successfully fetched records",
+			data: results,
+		});
+	} catch (error) {
+		return res.status(500).json({
+			success: false,
+			message: "Server Error. An error occured while fetching records",
+			error,
+		});
+	}
+};
+
 export const fetchTotalPUResults = async (req: Request, res: Response) => {
 	try {
 		const parties = await db.party.findMany()

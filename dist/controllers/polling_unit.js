@@ -92,7 +92,6 @@ export var fetchLGAPollingUnits = function (req, res) { return __awaiter(void 0,
             case 0:
                 _a.trys.push([0, 2, , 3]);
                 lga_id = req.body.lga_id;
-                console.log(lga_id, typeof lga_id);
                 return [4 /*yield*/, db.polling_unit.findMany({ where: { lga_id: lga_id } })];
             case 1:
                 pollingUnits = _a.sent();
@@ -119,7 +118,6 @@ export var fetchWardPollingUnits = function (req, res) { return __awaiter(void 0
             case 0:
                 _a.trys.push([0, 2, , 3]);
                 ward_id = req.body.ward_id;
-                console.log(ward_id, typeof ward_id);
                 return [4 /*yield*/, db.polling_unit.findMany({ where: { ward_id: ward_id } })];
             case 1:
                 pollingUnits = _a.sent();
@@ -134,6 +132,32 @@ export var fetchWardPollingUnits = function (req, res) { return __awaiter(void 0
                         success: false,
                         message: "Server Error. An error occured while fetching records",
                         error: error_4,
+                    })];
+            case 3: return [2 /*return*/];
+        }
+    });
+}); };
+export var fetchPollingUnitById = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var unit_id, pollingUnit, error_5;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                unit_id = req.body.unit_id;
+                return [4 /*yield*/, db.polling_unit.findUnique({ where: { polling_unit_id: unit_id } })];
+            case 1:
+                pollingUnit = _a.sent();
+                return [2 /*return*/, res.status(200).json({
+                        success: true,
+                        message: "Successfully fetched records",
+                        data: pollingUnit,
+                    })];
+            case 2:
+                error_5 = _a.sent();
+                return [2 /*return*/, res.status(500).json({
+                        success: false,
+                        message: "Server Error. An error occured while fetching records",
+                        error: error_5,
                     })];
             case 3: return [2 /*return*/];
         }

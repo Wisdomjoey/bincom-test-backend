@@ -40,7 +40,6 @@ export const fetchTotalPollingUnits = async (req: Request, res: Response) => {
 export const fetchLGAPollingUnits = async (req: Request, res: Response) => {
 	try {
 		const { lga_id } = req.body
-		console.log(lga_id, typeof lga_id)
 		const pollingUnits = await db.polling_unit.findMany({ where: { lga_id } });
 
 		return res.status(200).json({
@@ -60,13 +59,31 @@ export const fetchLGAPollingUnits = async (req: Request, res: Response) => {
 export const fetchWardPollingUnits = async (req: Request, res: Response) => {
 	try {
 		const { ward_id } = req.body
-		console.log(ward_id, typeof ward_id)
 		const pollingUnits = await db.polling_unit.findMany({ where: { ward_id } });
 
 		return res.status(200).json({
 			success: true,
 			message: "Successfully fetched records",
 			data: pollingUnits,
+		});
+	} catch (error) {
+		return res.status(500).json({
+			success: false,
+			message: "Server Error. An error occured while fetching records",
+			error,
+		});
+	}
+};
+
+export const fetchPollingUnitById = async (req: Request, res: Response) => {
+	try {
+		const { unit_id } = req.body
+		const pollingUnit = await db.polling_unit.findUnique({ where: { polling_unit_id: unit_id } });
+
+		return res.status(200).json({
+			success: true,
+			message: "Successfully fetched records",
+			data: pollingUnit,
 		});
 	} catch (error) {
 		return res.status(500).json({

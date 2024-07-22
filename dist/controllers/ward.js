@@ -67,7 +67,6 @@ export var fetchLGAWards = function (req, res) { return __awaiter(void 0, void 0
             case 0:
                 _a.trys.push([0, 2, , 3]);
                 lga_id = req.body.lga_id;
-                console.log(lga_id, typeof lga_id);
                 return [4 /*yield*/, db.ward.findMany({ where: { lga_id: lga_id } })];
             case 1:
                 wards = _a.sent();
