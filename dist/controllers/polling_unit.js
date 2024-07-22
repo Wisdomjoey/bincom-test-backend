@@ -92,6 +92,7 @@ export var fetchLGAPollingUnits = function (req, res) { return __awaiter(void 0,
             case 0:
                 _a.trys.push([0, 2, , 3]);
                 lga_id = req.body.lga_id;
+                console.log(lga_id, typeof lga_id);
                 return [4 /*yield*/, db.polling_unit.findMany({ where: { lga_id: lga_id } })];
             case 1:
                 pollingUnits = _a.sent();
@@ -118,6 +119,7 @@ export var fetchWardPollingUnits = function (req, res) { return __awaiter(void 0
             case 0:
                 _a.trys.push([0, 2, , 3]);
                 ward_id = req.body.ward_id;
+                console.log(ward_id, typeof ward_id);
                 return [4 /*yield*/, db.polling_unit.findMany({ where: { ward_id: ward_id } })];
             case 1:
                 pollingUnits = _a.sent();

@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node ./dist/server.js",
-    "build": "npm install && nps prisma generate && tsc"
+    "build": "npm install"
   },
   "author": "Jay Z",
   "license": "ISC",
