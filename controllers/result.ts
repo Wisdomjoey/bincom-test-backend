@@ -40,6 +40,56 @@ export const fetchPUResults = async (req: Request, res: Response) => {
   }
 };
 
+export const fetchLGAResult = async (req: Request, res: Response) => {
+  try {
+    const { lga_id } = req.body;
+    const results = await db.announced_lga_results.findMany({
+      where: { lga_id },
+    });
+
+    return res.status(200).json({
+      success: true,
+      message: "Successfully fetched records",
+      data: results,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Server Error. An error occured while fetching records",
+      error,
+    });
+  }
+};
+
+export const fetchLGAPUResults = async (req: Request, res: Response) => {
+  try {
+    const { lga_id } = req.body;
+    const units = await db.polling_unit.findMany({
+      where: { lga_id },
+      select: { uniqueid: true },
+    });
+    const results = await db.$transaction([
+      ...units.map((val) =>
+        db.announced_pu_results.findMany({
+          where: { polling_unit_uniqueid: val.uniqueid },
+        })
+      ),
+    ]);
+
+    return res.status(200).json({
+      success: true,
+      message: "Successfully fetched records",
+      data: results,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Server Error. An error occured while fetching records",
+      error,
+    });
+  }
+};
+
 export const fetchPUResult = async (req: Request, res: Response) => {
   try {
     const { uniqueid } = req.body;

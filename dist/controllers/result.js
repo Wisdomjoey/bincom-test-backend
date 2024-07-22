@@ -95,15 +95,15 @@ export var fetchPUResults = function (req, res) { return __awaiter(void 0, void 
         }
     });
 }); };
-export var fetchPUResult = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var uniqueid, results, error_3;
+export var fetchLGAResult = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var lga_id, results, error_3;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                uniqueid = req.body.uniqueid;
-                return [4 /*yield*/, db.announced_pu_results.findMany({
-                        where: { polling_unit_uniqueid: uniqueid },
+                lga_id = req.body.lga_id;
+                return [4 /*yield*/, db.announced_lga_results.findMany({
+                        where: { lga_id: lga_id },
                     })];
             case 1:
                 results = _a.sent();
@@ -123,8 +123,72 @@ export var fetchPUResult = function (req, res) { return __awaiter(void 0, void 0
         }
     });
 }); };
+export var fetchLGAPUResults = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var lga_id, units, results, error_4;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 3, , 4]);
+                lga_id = req.body.lga_id;
+                return [4 /*yield*/, db.polling_unit.findMany({
+                        where: { lga_id: lga_id },
+                        select: { uniqueid: true },
+                    })];
+            case 1:
+                units = _a.sent();
+                return [4 /*yield*/, db.$transaction(__spreadArray([], units.map(function (val) {
+                        return db.announced_pu_results.findMany({
+                            where: { polling_unit_uniqueid: val.uniqueid },
+                        });
+                    }), true))];
+            case 2:
+                results = _a.sent();
+                return [2 /*return*/, res.status(200).json({
+                        success: true,
+                        message: "Successfully fetched records",
+                        data: results,
+                    })];
+            case 3:
+                error_4 = _a.sent();
+                return [2 /*return*/, res.status(500).json({
+                        success: false,
+                        message: "Server Error. An error occured while fetching records",
+                        error: error_4,
+                    })];
+            case 4: return [2 /*return*/];
+        }
+    });
+}); };
+export var fetchPUResult = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var uniqueid, results, error_5;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                uniqueid = req.body.uniqueid;
+                return [4 /*yield*/, db.announced_pu_results.findMany({
+                        where: { polling_unit_uniqueid: uniqueid },
+                    })];
+            case 1:
+                results = _a.sent();
+                return [2 /*return*/, res.status(200).json({
+                        success: true,
+                        message: "Successfully fetched records",
+                        data: results,
+                    })];
+            case 2:
+                error_5 = _a.sent();
+                return [2 /*return*/, res.status(500).json({
+                        success: false,
+                        message: "Server Error. An error occured while fetching records",
+                        error: error_5,
+                    })];
+            case 3: return [2 /*return*/];
+        }
+    });
+}); };
 export var uploadPUResult = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, uniqueid_1, results, entered_by_1, result_id_1, existingResult, error_4;
+    var _a, uniqueid_1, results, entered_by_1, result_id_1, existingResult, error_6;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
@@ -167,18 +231,18 @@ export var uploadPUResult = function (req, res) { return __awaiter(void 0, void 
                         data: results,
                     })];
             case 6:
-                error_4 = _b.sent();
+                error_6 = _b.sent();
                 return [2 /*return*/, res.status(500).json({
                         success: false,
                         message: "Server Error. An error occured while fetching records",
-                        error: error_4,
+                        error: error_6,
                     })];
             case 7: return [2 /*return*/];
         }
     });
 }); };
 export var fetchTotalPUResults = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var parties, results_1, error_5;
+    var parties, results_1, error_7;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -206,11 +270,11 @@ export var fetchTotalPUResults = function (req, res) { return __awaiter(void 0, 
                         }), true),
                     })];
             case 3:
-                error_5 = _a.sent();
+                error_7 = _a.sent();
                 return [2 /*return*/, res.status(500).json({
                         success: false,
                         message: "Server Error. An error occured while fetching records",
-                        error: error_5,
+                        error: error_7,
                     })];
             case 4: return [2 /*return*/];
         }
