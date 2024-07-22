@@ -1,7 +1,5 @@
 import { Request, Response } from "express";
 import { db } from "../config/db_config.js";
-import { party } from "@prisma/client";
-import { APIResponse } from "../types.js";
 import { generateId } from "../helpers.js";
 
 export const fetchLGAResults = async (req: Request, res: Response) => {
@@ -14,6 +12,8 @@ export const fetchLGAResults = async (req: Request, res: Response) => {
       data: results,
     });
   } catch (error) {
+    console.error(error);
+
     return res.status(500).json({
       success: false,
       message: "Server Error. An error occured while fetching records",
@@ -32,6 +32,8 @@ export const fetchPUResults = async (req: Request, res: Response) => {
       data: results,
     });
   } catch (error) {
+    console.error(error);
+
     return res.status(500).json({
       success: false,
       message: "Server Error. An error occured while fetching records",
@@ -53,6 +55,8 @@ export const fetchLGAResult = async (req: Request, res: Response) => {
       data: results,
     });
   } catch (error) {
+    console.error(error);
+
     return res.status(500).json({
       success: false,
       message: "Server Error. An error occured while fetching records",
@@ -82,6 +86,8 @@ export const fetchLGAPUResults = async (req: Request, res: Response) => {
       data: results,
     });
   } catch (error) {
+    console.error(error);
+
     return res.status(500).json({
       success: false,
       message: "Server Error. An error occured while fetching records",
@@ -103,6 +109,8 @@ export const fetchPUResult = async (req: Request, res: Response) => {
       data: results,
     });
   } catch (error) {
+    console.error(error);
+
     return res.status(500).json({
       success: false,
       message: "Server Error. An error occured while fetching records",
@@ -149,6 +157,8 @@ export const uploadPUResult = async (req: Request, res: Response) => {
       data: results,
     });
   } catch (error) {
+    console.error(error);
+
     return res.status(500).json({
       success: false,
       message: "Server Error. An error occured while fetching records",
@@ -180,6 +190,8 @@ export const fetchTotalPUResults = async (req: Request, res: Response) => {
       ],
     });
   } catch (error) {
+    console.error(error);
+
     return res.status(500).json({
       success: false,
       message: "Server Error. An error occured while fetching records",

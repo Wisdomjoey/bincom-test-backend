@@ -12,7 +12,9 @@ export const fetchPollingUnits = async (req: Request, res: Response) => {
       data: pollingUnits,
     });
   } catch (error) {
-    return res.status(500).json({
+    console.error(error);
+
+return res.status(500).json({
       success: false,
       message: "Server Error. An error occured while fetching records",
       error,
@@ -30,7 +32,9 @@ export const fetchTotalPollingUnits = async (req: Request, res: Response) => {
       data: count,
     });
   } catch (error) {
-    return res.status(500).json({
+    console.error(error);
+
+return res.status(500).json({
       success: false,
       message: "Server Error. An error occured while fetching records",
       error,
@@ -49,7 +53,9 @@ export const fetchLGAPollingUnits = async (req: Request, res: Response) => {
       data: pollingUnits,
     });
   } catch (error) {
-    return res.status(500).json({
+    console.error(error);
+
+return res.status(500).json({
       success: false,
       message: "Server Error. An error occured while fetching records",
       error,
@@ -68,7 +74,9 @@ export const fetchWardPollingUnits = async (req: Request, res: Response) => {
       data: pollingUnits,
     });
   } catch (error) {
-    return res.status(500).json({
+    console.error(error);
+
+return res.status(500).json({
       success: false,
       message: "Server Error. An error occured while fetching records",
       error,
@@ -142,7 +150,9 @@ export const createPollingUnit = async (req: Request, res: Response) => {
       data: pollingUnit.polling_unit_id,
     });
   } catch (error) {
-    return res.status(500).json({
+    console.error(error);
+
+return res.status(500).json({
       success: false,
       message: "Server Error. An error occured while creating record",
       error,
@@ -163,7 +173,9 @@ export const fetchPollingUnitById = async (req: Request, res: Response) => {
       data: pollingUnit,
     });
   } catch (error) {
-    return res.status(500).json({
+    console.error(error);
+
+return res.status(500).json({
       success: false,
       message: "Server Error. An error occured while fetching records",
       error,

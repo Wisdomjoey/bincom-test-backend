@@ -11,7 +11,9 @@ export const fetchWards = async (req: Request, res: Response) => {
 			data: wards,
 		});
 	} catch (error) {
-		return res.status(500).json({
+		console.error(error);
+
+return res.status(500).json({
 			success: false,
 			message: "Server Error. An error occured while fetching records",
 			error,
@@ -30,7 +32,9 @@ export const fetchLGAWards = async (req: Request, res: Response) => {
 			data: wards,
 		});
 	} catch (error) {
-		return res.status(500).json({
+		console.error(error);
+
+return res.status(500).json({
 			success: false,
 			message: "Server Error. An error occured while fetching records",
 			error,
@@ -48,7 +52,9 @@ export const fetchTotalWards = async (req: Request, res: Response) => {
 			data: count,
 		});
 	} catch (error) {
-		return res.status(500).json({
+		console.error(error);
+
+return res.status(500).json({
 			success: false,
 			message: "Server Error. An error occured while fetching records",
 			error,

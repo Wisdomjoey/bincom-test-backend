@@ -51,6 +51,7 @@ export var fetchLGAs = function (req, res) { return __awaiter(void 0, void 0, vo
                     })];
             case 2:
                 error_1 = _a.sent();
+                console.error(error_1);
                 return [2 /*return*/, res.status(500).json({
                         success: false,
                         message: "Server Error. An error occured while fetching records",
@@ -76,6 +77,7 @@ export var fetchTotalLGAs = function (req, res) { return __awaiter(void 0, void 
                     })];
             case 2:
                 error_2 = _a.sent();
+                console.error(error_2);
                 return [2 /*return*/, res.status(500).json({
                         success: false,
                         message: "Server Error. An error occured while fetching records",

@@ -11,7 +11,9 @@ export const fetchLGAs = async (req: Request, res: Response) => {
 			data: lgas,
 		});
 	} catch (error) {
-		return res.status(500).json({
+		console.error(error);
+
+return res.status(500).json({
 			success: false,
 			message: "Server Error. An error occured while fetching records",
 			error,
@@ -29,7 +31,9 @@ export const fetchTotalLGAs = async (req: Request, res: Response) => {
 			data: lgas,
 		});
 	} catch (error) {
-		return res.status(500).json({
+		console.error(error);
+
+return res.status(500).json({
 			success: false,
 			message: "Server Error. An error occured while fetching records",
 			error,

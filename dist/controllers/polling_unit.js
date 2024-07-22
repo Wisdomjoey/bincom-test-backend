@@ -52,6 +52,7 @@ export var fetchPollingUnits = function (req, res) { return __awaiter(void 0, vo
                     })];
             case 2:
                 error_1 = _a.sent();
+                console.error(error_1);
                 return [2 /*return*/, res.status(500).json({
                         success: false,
                         message: "Server Error. An error occured while fetching records",
@@ -77,6 +78,7 @@ export var fetchTotalPollingUnits = function (req, res) { return __awaiter(void 
                     })];
             case 2:
                 error_2 = _a.sent();
+                console.error(error_2);
                 return [2 /*return*/, res.status(500).json({
                         success: false,
                         message: "Server Error. An error occured while fetching records",
@@ -103,6 +105,7 @@ export var fetchLGAPollingUnits = function (req, res) { return __awaiter(void 0,
                     })];
             case 2:
                 error_3 = _a.sent();
+                console.error(error_3);
                 return [2 /*return*/, res.status(500).json({
                         success: false,
                         message: "Server Error. An error occured while fetching records",
@@ -129,6 +132,7 @@ export var fetchWardPollingUnits = function (req, res) { return __awaiter(void 0
                     })];
             case 2:
                 error_4 = _a.sent();
+                console.error(error_4);
                 return [2 /*return*/, res.status(500).json({
                         success: false,
                         message: "Server Error. An error occured while fetching records",
@@ -223,6 +227,7 @@ export var createPollingUnit = function (req, res) { return __awaiter(void 0, vo
                     })];
             case 15:
                 error_5 = _b.sent();
+                console.error(error_5);
                 return [2 /*return*/, res.status(500).json({
                         success: false,
                         message: "Server Error. An error occured while creating record",
@@ -251,6 +256,7 @@ export var fetchPollingUnitById = function (req, res) { return __awaiter(void 0,
                     })];
             case 2:
                 error_6 = _a.sent();
+                console.error(error_6);
                 return [2 /*return*/, res.status(500).json({
                         success: false,
                         message: "Server Error. An error occured while fetching records",

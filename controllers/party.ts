@@ -13,7 +13,9 @@ export const fetchParties = async (req: Request, res: Response) => {
 				data: parties,
 			});
 	} catch (error) {
-		return res.status(500).json({
+		console.error(error);
+
+return res.status(500).json({
 			success: false,
 			message: "Server Error. An error occured while fetching records",
 			error,

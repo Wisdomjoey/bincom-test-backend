@@ -61,6 +61,7 @@ export var fetchLGAResults = function (req, res) { return __awaiter(void 0, void
                     })];
             case 2:
                 error_1 = _a.sent();
+                console.error(error_1);
                 return [2 /*return*/, res.status(500).json({
                         success: false,
                         message: "Server Error. An error occured while fetching records",
@@ -86,6 +87,7 @@ export var fetchPUResults = function (req, res) { return __awaiter(void 0, void 
                     })];
             case 2:
                 error_2 = _a.sent();
+                console.error(error_2);
                 return [2 /*return*/, res.status(500).json({
                         success: false,
                         message: "Server Error. An error occured while fetching records",
@@ -114,6 +116,7 @@ export var fetchLGAResult = function (req, res) { return __awaiter(void 0, void 
                     })];
             case 2:
                 error_3 = _a.sent();
+                console.error(error_3);
                 return [2 /*return*/, res.status(500).json({
                         success: false,
                         message: "Server Error. An error occured while fetching records",
@@ -150,6 +153,7 @@ export var fetchLGAPUResults = function (req, res) { return __awaiter(void 0, vo
                     })];
             case 3:
                 error_4 = _a.sent();
+                console.error(error_4);
                 return [2 /*return*/, res.status(500).json({
                         success: false,
                         message: "Server Error. An error occured while fetching records",
@@ -178,6 +182,7 @@ export var fetchPUResult = function (req, res) { return __awaiter(void 0, void 0
                     })];
             case 2:
                 error_5 = _a.sent();
+                console.error(error_5);
                 return [2 /*return*/, res.status(500).json({
                         success: false,
                         message: "Server Error. An error occured while fetching records",
@@ -232,6 +237,7 @@ export var uploadPUResult = function (req, res) { return __awaiter(void 0, void 
                     })];
             case 6:
                 error_6 = _b.sent();
+                console.error(error_6);
                 return [2 /*return*/, res.status(500).json({
                         success: false,
                         message: "Server Error. An error occured while fetching records",
@@ -271,6 +277,7 @@ export var fetchTotalPUResults = function (req, res) { return __awaiter(void 0, 
                     })];
             case 3:
                 error_7 = _a.sent();
+                console.error(error_7);
                 return [2 /*return*/, res.status(500).json({
                         success: false,
                         message: "Server Error. An error occured while fetching records",
