@@ -40,6 +40,7 @@ export const fetchTotalPollingUnits = async (req: Request, res: Response) => {
 export const fetchLGAPollingUnits = async (req: Request, res: Response) => {
 	try {
 		const { lga_id } = req.body
+		console.log(lga_id, typeof lga_id)
 		const pollingUnits = await db.polling_unit.findMany({ where: { lga_id } });
 
 		return res.status(200).json({
@@ -59,6 +60,7 @@ export const fetchLGAPollingUnits = async (req: Request, res: Response) => {
 export const fetchWardPollingUnits = async (req: Request, res: Response) => {
 	try {
 		const { ward_id } = req.body
+		console.log(ward_id, typeof ward_id)
 		const pollingUnits = await db.polling_unit.findMany({ where: { ward_id } });
 
 		return res.status(200).json({
